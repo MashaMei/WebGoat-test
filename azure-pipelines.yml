@@ -1,0 +1,28 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: InstallMaven
+    displayName: 'Install and Check Maven'
+    steps:
+      - script: |
+          # Install Maven
+          sudo apt-get install -y maven
+          # Check Maven version
+          mvn -version
+
+  - job: InstallUnifiedAgent
+    displayName: 'Unified Agent Installation and Verification'
+    steps:
+      - script: |
+          curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
+          echo Unified Agent downloaded successfully
+          java -jar wss-unified-agent.jar -apiKey $(APIKEY) -userKey $(USERKEY) -wssUrl $(WSS_URL)
+
+        env:
+          WS_PRODUCTNAME: 'Test_azdo_with_seva'
+          WS_PROJECTNAME: 'Azdo_pipe_test'
+        displayName: 'Run a one-line script'
