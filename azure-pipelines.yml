@@ -20,7 +20,7 @@ jobs:
       - script: |
           curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
           echo Unified Agent downloaded successfully
-          java -jar wss-unified-agent.jar -apiKey $(APIKEY) -userKey $(USERKEY) -wssUrl $(WSS_URL)
+          java -jar wss-unified-agent.jar -apiKey $(APIKEY) -userKey $(USERKEY)
 
         env:
           WSS_URL: https://saas.whitesourcesoftware.com
