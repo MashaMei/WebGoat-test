@@ -23,6 +23,7 @@ jobs:
           java -jar wss-unified-agent.jar -apiKey $(APIKEY) -userKey $(USERKEY) -wssUrl $(WSS_URL)
 
         env:
+          wssUrl: 'https://saas.whitesourcesoftware.com'
           WS_PRODUCTNAME: 'Test_azdo_with_seva'
           WS_PROJECTNAME: 'Azdo_pipe_test'
         displayName: 'Run a one-line script'
