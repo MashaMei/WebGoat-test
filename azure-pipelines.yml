@@ -20,11 +20,13 @@ jobs:
       - script: |
           curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
           echo Unified Agent downloaded successfully
-          java -jar wss-unified-agent.jar -apiKey $(APIKEY) -userKey $(USERKEY)
+          java -jar wss-unified-agent.jar
 
         env:
           WSS_URL: https://saas.whitesourcesoftware.com
           WS_PRODUCTNAME: 'Test_azdo_with_seva'
           WS_PROJECTNAME: 'Azdo_pipe_test'
           WS_FILESYSTEMSCAN: false
+          WS_MAVEN.RESOLVEDEPENDENCIES: TRUE
+          WS_RUNPRESTEP: TRUE
         displayName: 'Run a one-line script'
