@@ -26,4 +26,5 @@ jobs:
           WSS_URL: https://saas.whitesourcesoftware.com
           WS_PRODUCTNAME: 'Test_azdo_with_seva'
           WS_PROJECTNAME: 'Azdo_pipe_test'
+          fileSystemScan: 'FALSE'
         displayName: 'Run a one-line script'
