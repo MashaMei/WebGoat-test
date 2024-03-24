@@ -27,8 +27,10 @@ jobs:
           WS_PRODUCTNAME: 'Test_azdo_with_seva'
           WS_PROJECTNAME: 'Azdo_pipe_test'
           WS_FILESYSTEMSCAN: false
-          WS_MAVEN.RESOLVEDEPENDENCIES: TRUE
-          WS_RUNPRESTEP: TRUE
+          WS_MAVEN_RESOLVEDEPENDENCIES: TRUE
+          WS_CHECKPOLICIES: TRUE
+          WS_FORCECHECKALLDEPENDENCIES: TRUE
+          #WS_RUNPRESTEP: TRUE
           WS_APIKEY: 'ff283a51538d4bb9abbbf25d4cd91e4903cb2c0ef1f34096be8ab0a6d3c09ebc'
           WS_USERKEY: '1c1667586494463985b488a809d10761e334583e7935479ca1351fd3429c3358'
         displayName: 'Run a one-line script'
