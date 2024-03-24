@@ -14,23 +14,36 @@ jobs:
           # Check Maven version
           mvn -version
 
-  - job: InstallUnifiedAgent
-    displayName: 'Unified Agent Installation and Verification'
+  - job: WhiteSource
+    displayName: 'WhiteSource Task'
     steps:
-      - script: |
-          curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
-          echo Unified Agent downloaded successfully
-          java -jar wss-unified-agent.jar
+      - task: WhiteSource@21
+        inputs:
+          cwd: '$(System.DefaultWorkingDirectory)'
+          projectName: 'via_Task'
+          configuration: |
+            maven.resolveDependencies=true
 
-        env:
-          WSS_URL: https://saas.whitesourcesoftware.com
-          WS_PRODUCTNAME: 'Test_azdo_with_seva'
-          WS_PROJECTNAME: 'Azdo_pipe_test'
-          WS_FILESYSTEMSCAN: false
-          WS_MAVEN_RESOLVEDEPENDENCIES: TRUE
-          WS_CHECKPOLICIES: TRUE
-          WS_FORCECHECKALLDEPENDENCIES: TRUE
-          #WS_RUNPRESTEP: TRUE
-          WS_APIKEY: 'ff283a51538d4bb9abbbf25d4cd91e4903cb2c0ef1f34096be8ab0a6d3c09ebc'
-          WS_USERKEY: '1c1667586494463985b488a809d10761e334583e7935479ca1351fd3429c3358'
-        displayName: 'Run a one-line script'
+
+
+# - job: InstallUnifiedAgent
+#   displayName: 'Unified Agent Installation and Verification'
+#   steps:
+#     - script: |
+#         curl -LJO https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar
+#         echo Unified Agent downloaded successfully
+#         java -jar wss-unified-agent.jar
+# 
+#       env:
+#         WSS_URL: https://saas.whitesourcesoftware.com
+#         WS_PRODUCTNAME: 'Test_azdo_with_seva'
+#         WS_PROJECTNAME: 'Azdo_pipe_test'
+#         WS_FILESYSTEMSCAN: false
+#         WS_MAVEN_RESOLVEDEPENDENCIES: TRUE
+#         WS_CHECKPOLICIES: TRUE
+#         WS_FORCECHECKALLDEPENDENCIES: TRUE
+#         #WS_RUNPRESTEP: TRUE
+#         WS_APIKEY: 'ff283a51538d4bb9abbbf25d4cd91e4903cb2c0ef1f34096be8ab0a6d3c09ebc'
+#         WS_USERKEY: '1c1667586494463985b488a809d10761e334583e7935479ca1351fd3429c3358'
+#       displayName: 'Run a one-line script'
+
