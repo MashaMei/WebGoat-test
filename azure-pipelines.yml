@@ -14,15 +14,6 @@ jobs:
           # Check Maven version
           mvn -version
 
-  - job: WhiteSource
-    displayName: 'WhiteSource Task'
-    steps:
-      - task: WhiteSource@21
-        inputs:
-          cwd: '$(System.DefaultWorkingDirectory)'
-          projectName: 'via_Task'
-          configuration: |
-            maven.resolveDependencies=true
 
 # - job: InstallUnifiedAgent
 #   displayName: 'Unified Agent Installation and Verification'
