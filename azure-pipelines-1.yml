@@ -1,0 +1,52 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+resources:
+- repo: self
+
+variables:
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: MEND_UR
+    value: 'https://saas.whitesourcesoftware.com'
+  - name: IMAGE_NAME
+    value: 'my-image'
+  - name: IMAGE_TAG
+    value: '$(Build.BuildId)'
+
+
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        repository: $(IMAGE_NAME)
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: $(IMAGE_TAG)
+    - task: Powershell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo Downloading Mend CLI
+          Invoke-WebRequest -Uri "https://downloads.mend.io/cli/windows_amd64/mend.exe" -OutFile "mend.exe"
+          
+          echo Run Mend Image Analysis
+          ./mend.exe image $(IMAGE_NAME):$(IMAGE_TAG) --local-pull 
+      env:
+        ### Authentication Environment Variable Secrets ###
+        MEND_EMAIL: $(MENDEMAIL)
+        MEND_USER_KEY: $(MENDUSERKEY)
